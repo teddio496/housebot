@@ -593,6 +593,7 @@ async fn cleanup_old_housebot_images(keep: &[&str]) -> anyhow::Result<()> {
 const HOUSEBOT_ENV_VARS: &[&str] = &[
     "DISCORD_BOT_TOKEN",
     "OWNER_DISCORD_ID",
+    "DATABASE_URL",
     "LLM_BASE_URL",
     "LLM_MODEL",
     "LLM_API_KEY",

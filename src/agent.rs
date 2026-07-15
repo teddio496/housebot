@@ -200,9 +200,13 @@ impl Agent {
             .flatten()
             .map(|tokens| tokens as usize)
             .unwrap_or_else(|| config::env_parse("MAX_CONTEXT_TOKENS", 10_000));
-        let memory = Memory::from_env()
-            .await
-            .expect("failed to initialize PostgreSQL persistent memory");
+        let memory = match Memory::from_env().await {
+            Ok(memory) => memory,
+            Err(error) => {
+                tracing::warn!(%error, "PostgreSQL memory unavailable, falling back to file-based memory");
+                Memory::default()
+            }
+        };
         Self {
             client,
             model: config::env_or("LLM_MODEL", "gemma-4-12b-qat-q4kxl"),

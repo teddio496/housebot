@@ -1,19 +1,6 @@
 name: house-chatbot
 
 services:
-  house-chatbot:
-    image: ghcr.io/bushshrub/housebot:latest
-    container_name: house-chatbot
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      DATABASE_URL: postgres://housebot:housebot@postgres/housebot
-    depends_on:
-      postgres:
-        condition: service_healthy
-    volumes:
-      - ./data:/app/data
-
   postgres:
     image: postgres:17-alpine
     restart: unless-stopped
