@@ -1755,6 +1755,7 @@ impl HouseBot {
                     deep_memory_enabled: user_config.deep_memory_enabled && !proactive,
                     display_name: &profile.display_name,
                     nickname: &profile.nickname,
+                    avatar_url: &profile.avatar_url,
                     profile_tags: &profile_tags,
                     quick_actions: &quick_actions,
                     guild_id: msg.guild_id.map(|guild| guild.get()),

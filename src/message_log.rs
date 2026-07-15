@@ -70,7 +70,8 @@ async fn append_line(path: &Path, line: &str) -> std::io::Result<()> {
         .append(true)
         .open(path)
         .await?;
-    file.write_all(line.as_bytes()).await
+    file.write_all(line.as_bytes()).await?;
+    file.flush().await
 }
 
 #[cfg(test)]
